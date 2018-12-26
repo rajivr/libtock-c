@@ -32,7 +32,7 @@ LEGACY_LIBS += $(TOCK_USERLAND_BASE_DIR)/libc++/libstdc++.a
 LEGACY_LIBS += $(TOCK_USERLAND_BASE_DIR)/libc++/libsupc++.a
 LEGACY_LIBS += $(TOCK_USERLAND_BASE_DIR)/libc++/libgcc.a
 
-
+RUST_LIBS += $(TOCK_USERLAND_BASE_DIR)/librust/target/thumbv7em-none-eabi/debug/librust.a
 
 # Rules to incorporate external libraries
 define EXTERN_LIB_RULES
@@ -133,7 +133,7 @@ $$(BUILDDIR)/$(1)/$(1).elf: $$(OBJS_$(1)) $$(TOCK_USERLAND_BASE_DIR)/newlib/libc
 	    -Xlinker --defsym=KERNEL_HEAP_SIZE=$$(KERNEL_HEAP_SIZE)\
 	    -T $$(LAYOUT)\
 	    -nostdlib\
-	    -Wl,--start-group $$(OBJS_$(1)) $$(LIBS_$(1)) $$(LEGACY_LIBS) -Wl,--end-group\
+	    -Wl,--start-group $$(OBJS_$(1)) $$(LIBS_$(1)) $$(LEGACY_LIBS) $$(RUST_LIBS) -Wl,--end-group\
 	    -Wl,-Map=$$(BUILDDIR)/$(1)/$(1).Map\
 	    -o $$@
 

@@ -1,0 +1,8 @@
+[build]
+target = "thumbv7em-none-eabi"
+
+[target.thumbv7em-none-eabi]
+rustflags = [
+  "-C", "relocation-model=ropi-rwpi",
+  "-D", "warnings",
+]
